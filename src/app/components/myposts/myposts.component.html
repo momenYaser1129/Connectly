@@ -44,13 +44,13 @@
               <a
               (click)="updatePostOne(post.body,post._id)"
               (click)="isCreateModalOpen = true"
-              class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200"
+              class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200"
               >update</a
             >
             
           </li>
           <li>
-              <a (click)="deletePost(post._id)" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">delete</a>
+              <a (click)="deletePost(post._id)" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200">delete</a>
           
             </li>
           </ul>
