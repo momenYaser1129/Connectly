@@ -37,7 +37,7 @@ export class TimelineComponent implements OnInit {
   visibleComments: { [postId: string]: boolean } = {};
   
   // Pagination params
-  page: number = 3;
+  page: number = 1;
   limit: number = 10;
   isLoading: boolean = false;
   hasMorePosts: boolean = true;
@@ -82,17 +82,14 @@ export class TimelineComponent implements OnInit {
     
     this.subDestroy = this._postsService.getAllPosts(this.page, this.limit).subscribe({
       next: (res) => {
-        if (this.page === 3) {
+        if (this.page === 1) {
           this.posts = res.posts;
-          this.isLoading = false;
         } else {
           this.posts = [...this.posts, ...res.posts];
         }
         
-        // Check if we have more posts to load
         this.hasMorePosts = res.posts.length === this.limit;
         
-        // Initialize all posts with comments hidden
         res.posts.forEach((post: IPost) => {
           this.visibleComments[post._id] = false;
         });
@@ -139,8 +136,18 @@ export class TimelineComponent implements OnInit {
         this.content = '';
         this.saveFile = null as any;
         this.saveFileUrl = '';
-        this.page = 3;
-        this.getAllPosts();
+        
+        // Add the new post to the beginning of the posts array
+        if (res.post) {
+          this.posts.unshift(res.post);
+          // Initialize comments visibility for the new post
+          this.visibleComments[res.post._id] = false;
+                 } else {
+           // If the response doesn't include the post, refresh the timeline
+           this.page = 1;
+           this.getAllPosts();
+         }
+        
         this.closeModal();
       },
       error: (err) => {
