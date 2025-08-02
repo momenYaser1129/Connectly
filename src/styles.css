@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+/* src/styles.scss */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import 'flowbite';
+body{
+    background-color: #eee;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2563eb; 
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}

@@ -1,0 +1,394 @@
+@if(userData.name){
+  <nav
+  class="bg-white/90 backdrop-blur-md border-b border-gray-200/50 shadow-lg sticky top-0 z-50"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+      <div class="flex items-center">
+        <a
+          routerLink="/timeline"
+          class="flex items-center gap-2 text-2xl font-extrabold text-gradient bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent tracking-tight"
+        >
+          <svg
+            class="h-9 w-9"
+            viewBox="0 0 32 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="2"
+              y="6"
+              width="28"
+              height="18"
+              rx="9"
+              fill="url(#paint0_linear)"
+            />
+            <ellipse
+              cx="16"
+              cy="15"
+              rx="10"
+              ry="7"
+              fill="#fff"
+              fill-opacity="0.7"
+            />
+            <path d="M16 23l-3 5 3-2 3 2-3-5z" fill="#7C3AED" />
+            <defs>
+              <linearGradient
+                id="paint0_linear"
+                x1="2"
+                y1="6"
+                x2="30"
+                y2="24"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#2563EB" />
+                <stop offset="1" stop-color="#A21CAF" />
+              </linearGradient>
+            </defs>
+          </svg>
+          Connectly
+        </a>
+      </div>
+
+      <!-- Right: User Info and Actions -->
+      <div class="flex items-center space-x-4">
+        <!-- User Info with Avatar -->
+        <div class="hidden md:flex items-center space-x-3">
+          <!-- User Avatar -->
+          <div class="relative">
+            <div
+              class="overflow-hidden h-12 w-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-lg shadow-lg"
+            >
+              <img
+                [src]="userData?.photo"
+                alt=""
+                class="h-12 w-12 rounded-full object-cover border-2 border-white shadow"
+              />
+            </div>
+            <div
+              class="absolute -bottom-0.5 -right-0.5 h-3 w-3 bg-green-400 border-2 border-white rounded-full"
+            ></div>
+          </div>
+
+          <!-- User Details -->
+          <div class="flex flex-col">
+            <span class="text-gray-800 font-semibold text-sm">{{
+              userData.name
+            }}</span>
+            <span class="text-gray-500 text-xs">Online</span>
+          </div>
+        </div>
+
+        <!-- Account Dropdown -->
+        <div class="relative hidden md:block">
+          <button
+            (click)="toggleAccountMenu()"
+            class="flex items-center gap-2 px-3 py-2 text-gray-700 hover:text-blue-600 transition-all duration-200 rounded-lg hover:bg-gray-50 border border-transparent hover:border-gray-200"
+          >
+            <svg
+              class="h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>
+            <span>Account</span>
+            <svg
+              class="h-4 w-4 transition-transform duration-200"
+              [class.rotate-180]="accountMenuOpen"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+          @if (accountMenuOpen) {
+          <div
+            class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 py-2 z-50"
+          >
+            <div class="px-4 py-3 border-b border-gray-100">
+              <p class="text-sm font-medium text-gray-900">
+                {{ userData.name }}
+              </p>
+              <p class="text-sm text-gray-500">{{ userData.email }}</p>
+            </div>
+            <a
+              routerLink="/timeline"
+              routerLinkActive="bg-blue-500 text-white"
+              class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150"
+            >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M3 12l2-2m0 0l7-7 7 7m-9 2v6m4-6v6m5 2a2 2 0 01-2 2H7a2 2 0 01-2-2v-7a2 2 0 012-2h10a2 2 0 012 2v7z"
+                />
+              </svg>
+              Home
+            </a>
+
+            <a
+              routerLink="/my-posts"
+              routerLinkActive="bg-blue-500 text-white"
+              class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150"
+            >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 7h10M7 11h10M7 15h6M5 5v14a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2z"
+                />
+              </svg>
+              My Posts
+            </a>
+            <a
+              routerLink="/profile-settings"
+              routerLinkActive="bg-blue-500 text-white"
+              class="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150"
+            >
+              <svg
+                class="h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+              Profile Settings
+            </a>
+            <div class="border-t border-gray-100 mt-2 pt-2">
+              <button
+                (click)="onSignOut()"
+                class="flex items-center gap-3 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-150 w-full text-left"
+              >
+                <svg
+                  class="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+                  />
+                </svg>
+                Sign Out
+              </button>
+            </div>
+          </div>
+          }
+        </div>
+
+        <!-- Quick Sign Out Button (Desktop) -->
+        <button
+          (click)="onSignOut()"
+          class="hidden md:flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+        >
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            />
+          </svg>
+          Sign Out
+        </button>
+      </div>
+
+      <!-- Mobile menu button -->
+      <div class="flex items-center md:hidden">
+        <button
+          type="button"
+          class="inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:text-blue-600 hover:bg-gray-100 focus:outline-none transition-all duration-200"
+          (click)="mobileMenuOpen = !mobileMenuOpen"
+        >
+          @if(!mobileMenuOpen) {
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+          } @else {
+          <svg
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+
+  @if (mobileMenuOpen) {
+  <div
+    class="md:hidden bg-white/95 backdrop-blur-sm shadow-lg border-t border-gray-200"
+  >
+    <!-- User Profile Section -->
+    <div class="px-4 py-4 border-b border-gray-100">
+      <div class="flex items-center space-x-3">
+        <div class="relative">
+          <div
+            class="overflow-hidden h-12 w-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-lg shadow-lg"
+          >
+            <img
+              [src]="userData.photo"
+              alt=""
+              class="h-12 w-12 rounded-full object-cover border-2 border-white shadow"
+            />
+          </div>
+          <div
+            class="absolute -bottom-0.5 -right-0.5 h-4 w-4 bg-green-400 border-2 border-white rounded-full"
+          ></div>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-gray-800 font-semibold">{{ userData.name }}</span>
+          <span class="text-gray-500 text-sm">{{ userData.email }}</span>
+          <span class="text-green-600 text-xs font-medium">● Online</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Items -->
+    <div class="px-2 py-2 space-y-1">
+      <a
+        routerLink="/profile-settings"
+        class="flex items-center gap-3 px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150"
+      >
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+          />
+        </svg>
+        Profile Settings
+      </a>
+      <a
+        routerLink="/my-posts"
+        class="flex items-center gap-3 px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150"
+      >
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M7 7h10M7 11h10M7 15h6M5 5v14a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2z"
+          />
+        </svg>
+        My Posts
+      </a>
+      <a
+        href="#"
+        class="flex items-center gap-3 px-3 py-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-150"
+      >
+        <svg
+          class="h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
+        Help & Support
+      </a>
+
+      <!-- Sign Out Button -->
+      <div class="pt-2 border-t border-gray-100">
+        <button
+          (click)="onSignOut()"
+          class="w-full flex items-center justify-center gap-3 px-3 py-3 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-md"
+        >
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            />
+          </svg>
+          Sign Out
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+</nav>
+
+}

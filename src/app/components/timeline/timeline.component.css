@@ -1,0 +1,45 @@
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Post Card Styling */
+article {
+  transition: all 0.2s ease-in-out;
+}
+
+article:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Button Effects */
+button {
+  transition: all 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Comments Section */
+.comments-section {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Image hover effect */
+img.rounded-full:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}

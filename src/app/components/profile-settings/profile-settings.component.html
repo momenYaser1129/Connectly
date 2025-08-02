@@ -1,0 +1,203 @@
+@if(userData?.name){
+  <div class="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Header -->
+      <div class="mb-10 text-center">
+      
+        <h1 class="text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">Profile Settings</h1>
+        <p class="mt-3 text-lg text-gray-600 max-w-md mx-auto">View and manage your account information and preferences</p>
+      </div>
+  
+      <!-- Profile Form -->
+      <div class="bg-white/80 backdrop-blur-sm shadow-xl rounded-2xl border border-white/20">
+        <div class="px-8 py-10">
+          <form class="space-y-8">
+                      <!-- Profile Picture Section -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-100">
+              <div class="flex items-center space-x-8">
+                <div class="flex-shrink-0">
+                  <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-lg opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                  @if(saveFile){
+                    <img
+                      class="relative h-28 w-28 rounded-full object-cover border-4 border-white shadow-lg"
+                      [src]="saveFileUrl"
+                      alt="Profile picture"
+                    />
+                  }
+                  @else{
+                    <img
+                      class="relative h-28 w-28 rounded-full object-cover border-4 border-white shadow-lg"
+                      [src]="userData.photo"
+                      alt="Profile picture"
+                    />
+                  }
+                    <div class="absolute -bottom-2 -right-2">
+                      <label for="profile-upload" class="cursor-pointer">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-3 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                          </svg>
+                        </div>
+                      </label>
+                    
+                    </div>
+                  </div>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-semibold text-gray-900 mb-2">Profile Picture</h3>
+                  <p class="text-gray-600 mb-4">
+                    Upload a new profile picture. JPG, PNG or GIF up to 4MB.
+                  </p>
+                  <div class="flex space-x-4">
+                    <button
+                    
+                      type="button"
+                      class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
+                    >
+                      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                      </svg>
+                      
+                      <span class="cursor-pointer" (click)="updateProfile()">Upload new image</span>
+                      <input
+                      id="profile-upload"
+                      type="file"
+                      (change)="changeImage($event)"
+                      accept="image/*"
+                      class="hidden"
+                    />
+                    </button>
+              
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+            <!-- Personal Information Section -->
+            <div class="bg-white rounded-xl p-6 border border-gray-100 shadow-sm">
+              <h3 class="text-xl font-semibold text-gray-900 mb-6 flex items-center">
+                <svg class="w-6 h-6 mr-3 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                </svg>
+                Personal Information
+              </h3>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Name Field -->
+                <div class="group">
+                  <label class=" text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    Full Name
+                  </label>
+                  <div class="w-full px-4 py-3 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl text-gray-900 font-medium shadow-sm group-hover:shadow-md transition-all duration-200">
+                    {{ userData.name }}
+                  </div>
+                </div>
+  
+                <!-- Email Field -->
+                <div class="group">
+                  <label class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    Email Address
+                  </label>
+                  <div class="w-full px-4 py-3 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl text-gray-900 font-medium shadow-sm group-hover:shadow-md transition-all duration-200">
+                    {{ userData.email }}
+                  </div>
+                </div>
+  
+                <!-- Date of Birth Field -->
+                <div class="group">
+                  <label class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    Date of Birth
+                  </label>
+                  <div class="w-full px-4 py-3 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl text-gray-900 font-medium shadow-sm group-hover:shadow-md transition-all duration-200">
+                    {{ userData.dateOfBirth | date:'longDate' }}
+                  </div>
+                </div>
+  
+                <!-- Gender Field -->
+                <div class="group">
+                  <label class="text-sm font-semibold text-gray-700 mb-3 flex items-center">
+                    <svg class="w-4 h-4 mr-2 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    Gender
+                  </label>
+                  <div class="w-full px-4 py-3 bg-gradient-to-r from-gray-50 to-gray-100 border border-gray-200 rounded-xl text-gray-900 font-medium shadow-sm group-hover:shadow-md transition-all duration-200 capitalize">
+                    {{ userData.gender }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+  
+          <!-- Security Section -->
+          <div class="bg-gradient-to-r from-red-50 to-orange-50 rounded-xl p-6 border border-red-100">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div class="flex-1">
+                <h3 class="text-xl font-semibold text-gray-900 mb-2 flex items-center">
+                  <svg class="w-6 h-6 mr-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                  </svg>
+                  Security
+                </h3>
+                <p class="text-gray-600 mb-4">Update your password to keep your account secure and protected</p>
+              </div>
+              <button
+              (click)="showChangePassword = !showChangePassword"
+                type="button"
+                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-red-500 to-orange-500 text-white font-medium rounded-xl hover:from-red-600 hover:to-orange-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
+                </svg>
+                {{ showChangePassword ? 'Cancel' : 'Change Password' }}
+              </button>
+            
+            </div>
+            @if(showChangePassword){
+              <form class="mt-4 space-y-4" [formGroup]="formChangePassword" (ngSubmit)="changePassword()"> 
+                <div>
+                <input
+                formControlName="password"
+                 type=" password" placeholder="Old Password" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all duration-200 border-none">
+              </div>
+                <div class="mt-4" >
+                  <input formControlName="newPassword" type="password" placeholder="New Password" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400 transition-all duration-200 border-none">
+                </div>
+                <button type="submit" class="py-2 w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-medium rounded-xl hover:from-orange-600 hover:to-red-600 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
+                  Submit
+                </button>
+              </form>
+            }
+          </div>
+        </div>
+      </div>
+  
+      <!-- Additional Info -->
+      <div class="mt-8 text-center">
+        <div class="bg-white/60 backdrop-blur-sm rounded-xl p-6 border border-white/20 shadow-sm">
+          <p class="text-gray-600 mb-2">
+            Need help with your account?
+          </p>
+          <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Contact support
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+}
