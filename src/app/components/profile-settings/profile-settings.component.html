@@ -13,25 +13,25 @@
         <div class="px-8 py-10">
           <form class="space-y-8">
                       <!-- Profile Picture Section -->
-            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-4 sm:p-6 border border-blue-100">
-              <div class="flex flex-col sm:flex-row items-center sm:items-start sm:space-x-8 space-y-6 sm:space-y-0">
-                <div class="flex-shrink-0 flex justify-center sm:block w-full sm:w-auto">
-                  <div class="relative group mx-auto">
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-6 border border-blue-100">
+              <div class="flex items-center space-x-8">
+                <div class="flex-shrink-0">
+                  <div class="relative group">
                     <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-lg opacity-30 group-hover:opacity-50 transition-opacity"></div>
-                    @if(saveFile){
-                      <img
-                        class="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full object-cover border-4 border-white shadow-lg"
-                        [src]="saveFileUrl"
-                        alt="Profile picture"
-                      />
-                    }
-                    @else{
-                      <img
-                        class="relative h-24 w-24 sm:h-28 sm:w-28 rounded-full object-cover border-4 border-white shadow-lg"
-                        [src]="userData.photo"
-                        alt="Profile picture"
-                      />
-                    }
+                  @if(saveFile){
+                    <img
+                      class="relative h-28 w-28 rounded-full object-cover border-4 border-white shadow-lg"
+                      [src]="saveFileUrl"
+                      alt="Profile picture"
+                    />
+                  }
+                  @else{
+                    <img
+                      class="relative h-28 w-28 rounded-full object-cover border-4 border-white shadow-lg"
+                      [src]="userData.photo"
+                      alt="Profile picture"
+                    />
+                  }
                     <div class="absolute -bottom-2 -right-2">
                       <label for="profile-upload" class="cursor-pointer">
                         <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-3 rounded-full hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105">
@@ -41,31 +41,35 @@
                           </svg>
                         </div>
                       </label>
+                    
                     </div>
                   </div>
                 </div>
-                <div class="flex-1 w-full">
-                  <h3 class="text-lg sm:text-xl font-semibold text-gray-900 mb-2 text-center sm:text-left">Profile Picture</h3>
-                  <p class="text-gray-600 mb-4 text-center sm:text-left text-sm sm:text-base">
+                <div class="flex-1">
+                  <h3 class="text-xl font-semibold text-gray-900 mb-2">Profile Picture</h3>
+                  <p class="text-gray-600 mb-4">
                     Upload a new profile picture. JPG, PNG or GIF up to 4MB.
                   </p>
-                  <div class="flex flex-col sm:flex-row items-center sm:items-start space-y-3 sm:space-y-0 sm:space-x-4 w-full">
+                  <div class="flex space-x-4">
                     <button
+                    
                       type="button"
-                      class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 w-full sm:w-auto"
+                      class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm font-medium rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105"
                     >
                       <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                       </svg>
+                      
                       <span class="cursor-pointer" (click)="updateProfile()">Upload new image</span>
                       <input
-                        id="profile-upload"
-                        type="file"
-                        (change)="changeImage($event)"
-                        accept="image/*"
-                        class="hidden"
-                      />
+                      id="profile-upload"
+                      type="file"
+                      (change)="changeImage($event)"
+                      accept="image/*"
+                      class="hidden"
+                    />
                     </button>
+              
                   </div>
                 </div>
               </div>

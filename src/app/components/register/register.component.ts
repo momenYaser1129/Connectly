@@ -18,7 +18,7 @@ export class RegisterComponent {
   private _Router = inject(Router)
   private _toastService = inject(ToastService);
   isLoading = false;
-
+  
 
 
   registerForm :FormGroup = this._FormBuilder.group({
@@ -38,10 +38,22 @@ export class RegisterComponent {
    }
    return {mismatch:true}
   }
+
+
   registerSubmit(){
     // console.log(this.registerForm.value);
     // console.log(this.registerForm.valid);
     if(this.registerForm.valid){
+      
+      const birthDate = new Date(this.registerForm.get('dateOfBirth')?.value);
+      const today = new Date();
+      const age = today.getFullYear() - birthDate.getFullYear();
+      
+      if(age < 16) {
+        this._toastService.error("You must be at least 16 years old to create an account", "Connectly");
+        return;
+      }
+      
       this.isLoading = true;
    this._AuthService.register(this.registerForm.value).subscribe({
     next:(res)=>{
