@@ -14,8 +14,8 @@ export class Posts {
     return this._HttpClient.post(`${environment.apiUrl}posts`,data)
   }
 
-  getAllPosts(page: number = 1, limit: number = 10, sort: string = '-createdAt'):Observable<any>{
-    return this._HttpClient.get(`${environment.apiUrl}posts?page=${page}&limit=${limit}&sort=${sort}`)
+  getAllPosts(page: number = 1, limit: number = 10):Observable<any>{
+    return this._HttpClient.get(`${environment.apiUrl}posts?page=${page}&limit=${limit}`)
   }
 
   getMyPosts():Observable<any>{

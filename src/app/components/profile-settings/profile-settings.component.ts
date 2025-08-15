@@ -36,9 +36,11 @@ export class ProfileSettingsComponent implements OnInit  {
   })
   ngOnInit(): void {
     this.spinner.show();
-    this.userDataSubscription = this._AuthService.getLoggedUserData().subscribe({
+    this.userDataSubscription = this._UsersService.userDataSubject.subscribe({
       next:(res)=>{
-        this.userData = res.user;
+        this.userData = res;
+        // console.log(this.userData);
+        
         this.spinner.hide();
       },
       error: (err) => {
@@ -85,11 +87,14 @@ export class ProfileSettingsComponent implements OnInit  {
       next:(res)=>{
         // console.log(res);
           this._UsersService.setImage(this.saveFileUrl)
+          
           this._toastService.success("Image updated successfully", "Connectly");
           this.spinner.hide();
         },
       error:(err)=>{
         this.spinner.hide();
+
+        this._toastService.error("Choose Picture First", "Connectly");
         console.log(err);
       }
     })

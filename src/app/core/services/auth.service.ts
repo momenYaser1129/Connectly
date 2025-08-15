@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../environment/environment';
 import { jwtDecode } from 'jwt-decode';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { CookieService } from './cookie.service';
 export class AuthService {
 
   userData:any;
-
+  // userDataSubject:BehaviorSubject<any> = new BehaviorSubject(null);
   constructor(private _http:HttpClient, private _Router:Router, private _CookieService:CookieService) { }
   
   register(data:any):Observable<any>{
@@ -25,7 +25,11 @@ export class AuthService {
     const token = this._CookieService.get("socialToken");
     if(token){
       this.userData = jwtDecode(token);
-      // console.log(this.userData);
+      console.log(this.userData);
+      
+      // this.userDataSubject.next(jwtDecode(token));
+      // console.log(jwtDecode(token));
+      
     }
   }
 

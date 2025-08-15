@@ -7,6 +7,7 @@ import { environment } from '../environment/environment';
   providedIn: 'root'
 })
 export class Users {
+  userDataSubject:BehaviorSubject<any> = new BehaviorSubject(null);
   private imageSubject = new BehaviorSubject<string>("")
     
   image$ = this.imageSubject.asObservable();
@@ -16,6 +17,15 @@ export class Users {
   }
   getImage(){
     return this.imageSubject.getValue()
+  }
+  getLoggedUserSub(){
+    this.getLoggedUserData().subscribe({
+      next:(res)=>{
+        console.log(res.user);
+        this.userDataSubject.next(res.user);
+
+      }
+    })
   }
 
   constructor(private _HttpClient : HttpClient) { }
