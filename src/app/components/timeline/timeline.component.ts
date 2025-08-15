@@ -43,7 +43,6 @@ export class TimelineComponent implements OnInit {
   hasMorePosts: boolean = true;
   
   ngOnInit(): void {
-    this.getAllPosts();
     this._UsersService.userDataSubject.subscribe({
       next:(res)=>{
         this.userData = res;
@@ -53,6 +52,7 @@ export class TimelineComponent implements OnInit {
         console.log(err)  ;
       }
     })
+    this.getAllPosts();
     this._UsersService.image$.subscribe({
       next:(res)=>{
        if(res){
