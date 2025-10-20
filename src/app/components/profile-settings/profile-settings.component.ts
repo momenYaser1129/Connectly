@@ -40,7 +40,7 @@ export class ProfileSettingsComponent implements OnInit  {
       next:(res)=>{
         this.userData = res;
         // console.log(this.userData);
-        
+
         this.spinner.hide();
       },
       error: (err) => {
@@ -53,18 +53,25 @@ export class ProfileSettingsComponent implements OnInit  {
 
   changePassword(){
     this.spinner.show();
+    if(this.formChangePassword.get('password')?.value === this.formChangePassword.get('newPassword')?.value){
+      this._toastService.error("Old and New Password cannot be the same", "Connectly");
+      this.spinner.hide();
+      return;
+    }
     this._AuthService.changePassword(this.formChangePassword.value).subscribe({
       next:(res)=>{
         // console.log(res);
           this._CookieService.set("socialToken",res.token,7,"/","",false,"Strict");
           this._toastService.success("Password changed successfully", "Connectly");
           this.spinner.hide();
+          this.showChangePassword = false;
+          this.formChangePassword.reset();
         // console.log(this.formChangePassword.value);
 
       },
       error:(err)=>{
         this.spinner.hide();
-        console.log(err);
+        // console.log(err);
       }
     })
     // console.log(this.formChangePassword.value);
@@ -87,7 +94,7 @@ export class ProfileSettingsComponent implements OnInit  {
       next:(res)=>{
         // console.log(res);
           this._UsersService.setImage(this.saveFileUrl)
-          
+
           this._toastService.success("Image updated successfully", "Connectly");
           this.spinner.hide();
         },
@@ -95,7 +102,7 @@ export class ProfileSettingsComponent implements OnInit  {
         this.spinner.hide();
 
         this._toastService.error("Choose Picture First", "Connectly");
-        console.log(err);
+        // console.log(err);
       }
     })
   }

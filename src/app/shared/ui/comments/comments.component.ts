@@ -27,7 +27,7 @@ export class CommentsComponent implements OnInit {
   private readonly _fb = inject(FormBuilder);
   private readonly _toastService = inject(ToastService);
   @Input({ required: true }) postId!: string;
- 
+
   //services
   comments: IComment[] = [];
   userData:any;
@@ -46,11 +46,11 @@ isLoading = true;
         this.isLoading = false;
         this.comments = res.comments.reverse();
         // console.log(res);
-        
-        
+
+
       },
       error:(err)=>{
-        console.log(err);
+        // console.log(err);
         this.isLoading = false;
       }
     });
@@ -62,14 +62,14 @@ isLoading = true;
         // console.log(this.userData);
       },
       error:(err)=>{
-        console.log(err)  ;
+        // console.log(err)  ;
       }
     })
     this._usersService.image$.subscribe({
       next:(res)=>{
        if(res){
         this.userData.photo = res;
-        console.log(this.userData);
+        // console.log(this.userData);
        }
       }
     })
@@ -105,7 +105,7 @@ isLoading = true;
         this._toastService.success("Comment deleted successfully", "Connectly");
       },
       error: (err) => {
-        console.log(err);
+        // console.log(err);
       }
     });
   }
@@ -127,7 +127,7 @@ isLoading = true;
           this._toastService.success("Comment updated successfully", "Connectly");
         },
         error: (err) => {
-          console.log(err);
+          // console.log(err);
         }
       });
     } else {
@@ -139,7 +139,7 @@ isLoading = true;
           this._toastService.success("Comment added successfully", "Connectly");
         },
         error: (err) => {
-          console.log(err);
+          // console.log(err);
         },
       });
     }

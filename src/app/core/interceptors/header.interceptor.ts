@@ -10,7 +10,7 @@ export const headerInterceptor: HttpInterceptorFn = (req, next) => {
   const _CookieService = inject(CookieService);
 
   // check if token is not null and if it is not null then add it to the header
-  
+
   if(isPlatformBrowser(_PLATFORM_ID)){
     const token1 = _CookieService.get('socialToken');
     if (token1 !== null && token1 !== '') {
@@ -21,7 +21,7 @@ export const headerInterceptor: HttpInterceptorFn = (req, next) => {
         },
       });
     }
-  }   
+  }
 
   return next(req); // handle res
 };

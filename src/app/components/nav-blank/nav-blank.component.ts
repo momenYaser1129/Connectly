@@ -26,15 +26,15 @@ export class NavBlankComponent implements OnInit, OnDestroy {
       next: (res) => {
 
         this._UsersService.userDataSubject.next(res.user);
-        
+
         // Subscribe to user data changes
         this.userDataSubscription = this._UsersService.userDataSubject.subscribe({
           next: (userData) => {
             // console.log('User data updated:', userData);
-            console.log(userData);
-            
+            // console.log(userData);
+
             this.userData = userData;
-            
+
           }
         });
       },
@@ -42,7 +42,7 @@ export class NavBlankComponent implements OnInit, OnDestroy {
         console.error('Error fetching user data:', error);
       }
     });
-   
+
     this._UsersService.image$.subscribe({
       next:(res)=>{
        if(res){
@@ -51,7 +51,7 @@ export class NavBlankComponent implements OnInit, OnDestroy {
       }
     })
   }
-    
+
   ngOnDestroy(): void {
     if (this.userDataSubscription) {
       this.userDataSubscription.unsubscribe();
