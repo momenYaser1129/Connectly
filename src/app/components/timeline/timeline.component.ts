@@ -37,7 +37,7 @@ export class TimelineComponent implements OnInit {
   visibleComments: { [postId: string]: boolean } = {};
 
   // Pagination params
-  page: number = 3;
+  page: number = 1;
   limit: number = 10;
   isLoading: boolean = false;
   hasMorePosts: boolean = true;
@@ -79,7 +79,7 @@ export class TimelineComponent implements OnInit {
 
     this.subDestroy = this._postsService.getAllPosts(this.page, this.limit).subscribe({
       next: (res) => {
-        if (this.page === 3) {
+        if (this.page === 1) {
           this.posts = res.posts;
           this.isLoading = false;
         } else {
@@ -138,7 +138,7 @@ export class TimelineComponent implements OnInit {
         this.content = '';
         this.saveFile = null as any;
         this.saveFileUrl = '';
-        this.page = 3;
+        this.page = 1;
         this.getAllPosts();
         this.closeModal();
       },

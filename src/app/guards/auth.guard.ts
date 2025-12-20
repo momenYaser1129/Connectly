@@ -8,8 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   const _Router = inject(Router);
   const _PlatformID = inject(PLATFORM_ID);
   const _CookieService = inject(CookieService);
-  
-  // platform ID ---> isplatformborwser(id)    - isplatformserver(id) 
+
   if(isPlatformBrowser(_PlatformID)){
     if(_CookieService.check("socialToken")){
       return true;
